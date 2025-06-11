@@ -38,7 +38,6 @@
 #         "result": result
 #     }
 
-
 from fastapi import FastAPI, HTTPException
 import pandas as pd
 import pickle
@@ -72,9 +71,9 @@ def predict(customer_id: int):
 
     x = row[selected_features]
     prediction = model.predict(x)[0]
-    result = "fraud" if prediction == 1 else "not fraud"
+    isFraud = True if prediction == 1 else False
 
     return {
-        "prediction": int(prediction),
-        "result": result
+        "customerId": customer_id,
+        "isFraud": isFraud
     }
